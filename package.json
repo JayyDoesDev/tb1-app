@@ -1,0 +1,44 @@
+{
+    "name": "tb1-app",
+    "version": "1.0.0",
+    "scripts": {
+        "build": "gulp js && tsc",
+        "start": "node dist/Source/index.js",
+        "dev": "yarn build && eslint . && node dist/Source/index.js",
+        "eslint": "eslint .",
+        "builddocker": "docker build -t tb1-app .",
+        "docker": "docker run -dp 127.0.0.1:3000:8000 --name tb1-app tb1-app:latest",
+        "dockerstop": "docker stop tb1-app",
+        "docker-compose": "docker-compose up -d",
+        "docker-compose-stop": "docker-compose down"
+    },
+    "main": "dist/index.js",
+    "author": "J_DDev <69683068+jayydoesdev@users.noreply.github.com>",
+    "contributors": [],
+    "license": "MIT",
+    "dependencies": {
+        "@antibot/interactions": "^1.4.3",
+        "@antibot/zilla": "^1.0.2",
+        "@types/express": "^4.17.21",
+        "discord-api-types": "^0.37.91",
+        "discord-interactions": "^4.0.0",
+        "dotenv": "^16.4.5",
+        "express": "^4.19.2",
+        "glob": "^7.2.0",
+        "gulp": "^5.0.0",
+        "ioredis": "^5.4.1",
+        "mongoose": "^8.4.0",
+        "ngrok": "^5.0.0-beta.2",
+        "numeral": "^2.0.6"
+    },
+    "devDependencies": {
+        "@types/glob": "^8.1.0",
+        "@types/numeral": "^2.0.5",
+        "@typescript-eslint/eslint-plugin": "^7.10.0",
+        "@typescript-eslint/parser": "^7.10.0",
+        "eslint": "8.56.0",
+        "eslint-plugin-json": "^4.0.0",
+        "typescript": "^5.4.5",
+        "typescript-eslint": "^7.10.0"
+    }
+}

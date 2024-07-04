@@ -1,0 +1,13 @@
+services:
+  bot:
+    build: .
+    container_name: tb1-app
+    environment:
+      - BOTID=${BOTID}
+      - PUBLICKEY=${PUBLICKEY}
+      - TOKEN=${TOKEN}
+      - PORT=${PORT}
+      - NGROK=${NGROK}
+
+volumes:
+  mongo-data:
