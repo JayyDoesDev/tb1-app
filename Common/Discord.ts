@@ -14,7 +14,7 @@ import {
 import { MessageComponent } from "discord-interactions";
 
 type ValueResponse<T> = Pick<APIInteractionDataOptionBase<ApplicationCommandOptionType, T>, "name" | "type" | "value">;
-export type Combine<T, P> = T & P;
+export type Combine<T extends any[]> = T extends [infer F, ...infer R] ? F & Combine<R> : unknown;
 export class Discord {
     #req: Request;
     #res: Response;
@@ -27,8 +27,8 @@ export class Discord {
         this.#res.send(options);
     }
 
-    public getSubCommand(name: string): APIBaseInteraction<InteractionType.ApplicationCommand, Pick<Combine<APIApplicationCommandInteractionDataSubcommandOption, Record<"id", Snowflake>>, "id" | "name" | "options"| "type">> {
-        const subCommand: APIBaseInteraction<InteractionType.ApplicationCommand, Combine<APIApplicationCommandInteractionDataSubcommandOption, Record<"id", Snowflake>>> = this.#req.body;
+    public getSubCommand(name: string): APIBaseInteraction<InteractionType.ApplicationCommand, Pick<Combine<[APIApplicationCommandInteractionDataSubcommandOption, Record<"id", Snowflake>]>, "id" | "name" | "options"| "type">> {
+        const subCommand: APIBaseInteraction<InteractionType.ApplicationCommand, Combine<[APIApplicationCommandInteractionDataSubcommandOption, Record<"id", Snowflake>]>> = this.#req.body;
         for (const sub of subCommand.data.options) {
           if (sub.name == name) return subCommand;
         }
