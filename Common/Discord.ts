@@ -24,7 +24,7 @@ export class Discord {
       this.#res.send(options);
     }
 
-    public getSubCommandByName(name: string):  APIBaseInteraction<InteractionType.ApplicationCommand, Pick<Combine<APIApplicationCommandInteractionDataSubcommandOption, Record<"id", Snowflake>>, "id" | "name" | "options"| "type">> {
+    public getSubCommandByName(name: string): APIBaseInteraction<InteractionType.ApplicationCommand, Pick<Combine<APIApplicationCommandInteractionDataSubcommandOption, Record<"id", Snowflake>>, "id" | "name" | "options"| "type">> {
         const subCommand: APIBaseInteraction<InteractionType.ApplicationCommand, Combine<APIApplicationCommandInteractionDataSubcommandOption, Record<"id", Snowflake>>> = this.#req.body;
         for (const sub of subCommand.data.options) {
           if (sub.name == name) {
