@@ -7,7 +7,7 @@ import { Context } from "../Source/Context";
 import { ICommand } from "@antibot/interactions";
 import { Discord } from "./Discord";
 
-export interface Command<DiscordInteraction extends APIChatInputApplicationCommandInteraction | APIContextMenuInteraction | Discord> {
+export interface Command<APICommandAutocompleteInteractionResponseCallbackData> {
     command: ICommand;
     permissions?: any[];
     on: (ctx: Context, interaction: Discord) => void;

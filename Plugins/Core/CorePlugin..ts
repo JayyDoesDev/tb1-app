@@ -4,7 +4,8 @@ import { Context } from "../../Source/Context";
 import {
   InteractionContextType,
   IntegrationType,
-  ApplicationCommandType
+  ApplicationCommandType,
+  ApplicationCommandOptionType
 } from "@antibot/interactions";
 
 export = DefinePlugin({
@@ -21,7 +22,37 @@ export = DefinePlugin({
         options: []
       },
       on(ctx, interaction) {
-        interaction.send({ type: InteractionResponseType.ChannelMessageWithSource, data: { content: "pong!"}})
+        interaction.send({ type: InteractionResponseType.ChannelMessageWithSource, data: { content: "pong!"}});
+      },
+    },
+    {
+      command: {
+        name: "subtest",
+        type: ApplicationCommandType.CHAT_INPUT,
+        description: "Sub command test",
+        contexts: [InteractionContextType.BOT_DM, InteractionContextType.GUILD, InteractionContextType.PRIVATE_CHANNEL],
+        integration_types: [IntegrationType.USER_INSTALL],
+        options: [
+          {
+            name: "test",
+            type: ApplicationCommandOptionType.SUB_COMMAND,
+            description: "testtestsetst",
+            options: [],
+          },
+          {
+            name: "test2",
+            type: ApplicationCommandOptionType.SUB_COMMAND,
+            description: "testtestsetst",
+            options: [],
+          }
+        ]
+      },
+      on(ctx, interaction) {
+          if (interaction.getSubCommand("test")) {
+            interaction.send({ type: InteractionResponseType.ChannelMessageWithSource, data: { content: "test" }});
+          } else {
+            interaction.send({ type: InteractionResponseType.ChannelMessageWithSource, data: { content: "test2" }});
+          }
       },
     }
   ],
