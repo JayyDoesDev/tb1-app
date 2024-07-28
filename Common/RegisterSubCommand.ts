@@ -1,29 +1,36 @@
 /*import { Context } from "../Source/Context";
-import { AutocompleteInteraction, ChatInputCommandInteraction, ContextMenuCommandInteraction, InteractionResponse } from "discord.js";
+import { Combine, Discord } from "./Discord";
+import {
+  APIChatInputApplicationCommandInteraction,
+  APIContextMenuInteraction,
+  APICommandAutocompleteInteractionResponseCallbackData,
+  APIInteractionResponseCallbackData
+} from "discord-api-types/v10";
 
-interface RegisterSubCommandOptions<Interaction extends ChatInputCommandInteraction | ContextMenuCommandInteraction> {
+interface RegisterSubCommandOptions<Discord> {
     subCommand: string;
     ctx: Context;
-    interaction: Interaction | AutocompleteInteraction;
-    callback: (ctx: Context, interaction: Interaction) => Promise<InteractionResponse | void>;
-    autocomplete?: (ctx: Context, interaction: AutocompleteInteraction) => Promise<InteractionResponse | void>;
+    interaction: Discord;
+    callback: (ctx: Context, interaction: Discord) => Promise<APIInteractionResponseCallbackData | void>;
+    autocomplete?: (ctx: Context, interaction: Discord) => Promise<APIInteractionResponseCallbackData | void>;
 }
 
-export async function RegisterSubCommand<Interaction extends ChatInputCommandInteraction | ContextMenuCommandInteraction>(options: RegisterSubCommandOptions<Interaction>): Promise<void> {
+export async function RegisterSubCommand<T>(options: RegisterSubCommandOptions<Combine<[APIChatInputApplicationCommandInteraction | APIContextMenuInteraction | APICommandAutocompleteInteractionResponseCallbackData | Discord]>>): Promise<void> {
     switch (true) {
-        case options.interaction.isChatInputCommand(): {
-            if (options.interaction.options.getSubcommand() === options.subCommand) {
+      options.interaction.
+        case options.interaction.isMessageComponent: {
+            if (options.interaction) {
                 await options.callback(options.ctx, options.interaction);
             }
             break;
         }
-        case options.interaction.isContextMenuCommand(): {
+        case options.interaction.isContextMenuCommand: {
             if (options.interaction.commandName === options.subCommand) {
                 await options.callback(options.ctx, options.interaction);
             }
             break;
         }
-        case options.interaction.isAutocomplete(): {
+        case options.interaction.isAutocomplete: {
             if (options.autocomplete && options.interaction.options.getSubcommand() === options.subCommand) {
                 await options.autocomplete(options.ctx, options.interaction);
             }
@@ -31,4 +38,5 @@ export async function RegisterSubCommand<Interaction extends ChatInputCommandInt
         }
     }
 }
+
 */

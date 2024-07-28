@@ -6,11 +6,13 @@ import { ZillaCollection } from "@antibot/zilla";
 import { Command } from "../Common/DefineCommand";
 import { Interactions, Snowflake } from "@antibot/interactions";
 import { Plugin } from "../Common/DefinePlugin";
+import { Kotoba } from "@nanoko/kotoba";
 
 export class Context {
     public plugin: ZillaCollection<string, Plugin>;
     public interactions: ZillaCollection<string, Command<APIChatInputApplicationCommandInteraction | APIContextMenuInteraction>>;
     public interact: Interactions;
+    public kotoba: Kotoba;
 
     constructor() {
         this.plugin = new ZillaCollection<string, Plugin>();
@@ -21,5 +23,6 @@ export class Context {
             botToken: process.env.TOKEN as unknown as string,
             debug: true,
         });
+        this.kotoba = new Kotoba(Number(process.env.PORT));
     }
 }

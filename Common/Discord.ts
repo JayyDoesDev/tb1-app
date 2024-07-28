@@ -83,7 +83,8 @@ export class Discord {
         return this._get<ValueResponse<Snowflake>>(name, ApplicationCommandOptionType.Attachment)
     }
     private _get<T>(value: any, optionType: ApplicationCommandOptionType): T | any {
-        const options: Pick<APIInteractionDataOptionBase<ApplicationCommandOptionType, Snowflake>, "name" | "type" | "value">[] = this.#req.body;
+        const options: Pick<APIInteractionDataOptionBase<ApplicationCommandOptionType, Snowflake>, "name" | "type" | "value">[] = this.#req.body.data.options;
+        console.log(options);
         for (const option of options) {
           if (option.name == value && option.type == optionType) return option;
         }

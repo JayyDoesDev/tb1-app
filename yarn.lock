@@ -101,6 +101,14 @@
   dependencies:
     sparse-bitfield "^3.0.3"
 
+"@nanoko/kotoba@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@nanoko/kotoba/-/kotoba-1.0.2.tgz#5c364c9da3f030b93c948bff2436e74c0c375797"
+  integrity sha512-Dk4rKrwQVtQhOxnWaKwdGi0UUaC7LcKY9l7XWHamohQcIweEHH8saaC+Dt13lFu5YkiX/YJNh12k04jrnGoQlg==
+  dependencies:
+    "@types/express" "^4.17.21"
+    express "^4.19.2"
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
